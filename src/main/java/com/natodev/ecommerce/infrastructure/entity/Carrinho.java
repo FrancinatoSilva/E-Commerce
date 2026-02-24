@@ -1,4 +1,4 @@
-package com.natodev.ecommerce.infrastructure.entitys;
+package com.natodev.ecommerce.infrastructure.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -19,7 +19,7 @@ public class Carrinho {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "usuario_id", unique = true)
+    @Column(name = "usuario_id")
     private Integer usuarioId; // Conferir lógica de forest key!!!
 
     @Column(name = "data_criacao")

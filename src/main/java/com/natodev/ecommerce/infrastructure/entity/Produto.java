@@ -1,9 +1,10 @@
-package com.natodev.ecommerce.infrastructure.entitys;
+package com.natodev.ecommerce.infrastructure.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -15,9 +16,9 @@ import java.math.BigDecimal;
 public class Produto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "produto_id")
+    private UUID produtoId;
 
     @Column(name = "nome")
     private String nome;
@@ -34,8 +35,9 @@ public class Produto {
     @Column(name = "ativo")
     private Boolean ativo;
 
-    @Column(name = "categoria_id",  unique = true)
-    private Integer categoriaId; // Requere definição
+    @ManyToOne
+    @JoinColumn(name = "categoria_fk")
+    private Categoria categoria;
 
 
 }

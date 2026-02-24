@@ -1,9 +1,10 @@
-package com.natodev.ecommerce.infrastructure.entitys;
+package com.natodev.ecommerce.infrastructure.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -15,15 +16,16 @@ import java.math.BigDecimal;
 public class ItemPedido {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "item_pedido_id")
+    private UUID itemPedidoId;
 
-    @Column(name = "pedido_id", unique = true)
-    private Integer pedidoId; // Verificar lógica de forest key
+    @ManyToOne
+    @JoinColumn (name = "pedido_fk")
+    private Pedido pedido; // Verificar lógica de forest key
 
-    @Column(name = "produto_id", unique = true)
-    private Integer produtoId; // Verificar lógica de forest key
+    @Column(name = "produto_id")
+    private Integer produtoId; // Verificar lógica de foreign key
 
     @Column(name = "quantidade")
     private Integer quantidade;

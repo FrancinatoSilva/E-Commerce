@@ -1,10 +1,12 @@
-package com.natodev.ecommerce.infrastructure.entitys;
+package com.natodev.ecommerce.infrastructure.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -16,11 +18,11 @@ import java.time.LocalDate;
 public class Pedido {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "pedido_id")
+    private UUID pedidoId;
 
-    @Column(name = "usuario_id", unique = true)
+    @Column(name = "usuario_id")
     private Integer usuarioId;
 
     @Column(name = "data_pedido")
@@ -32,5 +34,7 @@ public class Pedido {
     @Column(name = "status")
     private String status;
 
+    @OneToMany(mappedBy = "pedido")
+    private List<ItemPedido> itensPedidos;
 
 }
