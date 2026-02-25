@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -21,11 +22,12 @@ public class ItemPedido {
     private UUID itemPedidoId;
 
     @ManyToOne
-    @JoinColumn (name = "pedido_fk")
-    private Pedido pedido; // Verificar lógica de forest key
+    @JoinColumn (name = "pedido_id")
+    private Pedido pedido;
 
-    @Column(name = "produto_id")
-    private Integer produtoId; // Verificar lógica de foreign key
+    @ManyToOne
+    @JoinColumn (name = "produto_id")
+    private Produto produto;
 
     @Column(name = "quantidade")
     private Integer quantidade;
@@ -35,4 +37,5 @@ public class ItemPedido {
 
     @Column(name = "sub_total")
     private BigDecimal subTotal;
+
 }

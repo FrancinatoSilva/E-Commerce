@@ -36,8 +36,7 @@ public class Produto {
     private Boolean ativo;
 
     @ManyToOne
-    @JoinColumn(name = "categoria_fk")
+    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
-
 
 }

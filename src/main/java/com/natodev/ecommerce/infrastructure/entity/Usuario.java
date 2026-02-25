@@ -2,8 +2,11 @@ package com.natodev.ecommerce.infrastructure.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -15,9 +18,9 @@ import java.time.LocalDateTime;
 public class Usuario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Integer id;
+    @Column(name = "usuario_id")
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID usuarioId;
 
     @Column(name = "nome")
     private String nome;
@@ -28,6 +31,11 @@ public class Usuario {
     @Column(name = "senha")
     private String senha;
 
-    @Column(name = "data_criacao")
-    private LocalDateTime dataCriacao = LocalDateTime.now();
+    @CreationTimestamp
+    @Column(name = "data_criacao", updatable = false)
+    private LocalDateTime dataCriacao;
+
+    @OneToMany(mappedBy = "usuario")
+    private List<Pedido> pedidos;
+
 }

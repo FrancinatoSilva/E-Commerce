@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -15,15 +16,16 @@ import java.math.BigDecimal;
 public class ItemCarrinho {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Integer id;
+    @Column(name = "item_carrinho_id")
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID itemCarrinhoId;
 
-    @Column(name = "carrinho_id")
-    private Integer carrinhoId; // Verificar lógica de forest key
+    @ManyToOne
+    @JoinColumn(name = "carrinho_id")
+    private Carrinho carrinho;
 
     @Column(name = "produto_id")
-    private Integer produtoId; // Verificar lógica de forest key
+    private Produto produto; // Verificar lógica de foreign key
 
     @Column (name = "quantidade")
     private Integer quantidade;

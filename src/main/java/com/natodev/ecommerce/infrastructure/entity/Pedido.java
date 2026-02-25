@@ -22,8 +22,9 @@ public class Pedido {
     @Column(name = "pedido_id")
     private UUID pedidoId;
 
-    @Column(name = "usuario_id")
-    private Integer usuarioId;
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 
     @Column(name = "data_pedido")
     private LocalDate dataPedido;
@@ -36,5 +37,6 @@ public class Pedido {
 
     @OneToMany(mappedBy = "pedido")
     private List<ItemPedido> itensPedidos;
+
 
 }
