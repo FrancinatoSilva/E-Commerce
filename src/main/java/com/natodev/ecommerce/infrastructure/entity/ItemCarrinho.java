@@ -24,8 +24,9 @@ public class ItemCarrinho {
     @JoinColumn(name = "carrinho_id")
     private Carrinho carrinho;
 
-    @Column(name = "produto_id")
-    private Produto produto; // Verificar lógica de foreign key
+    @ManyToOne
+    @JoinColumn(name = "produto_id")
+    private Produto produto;
 
     @Column (name = "quantidade")
     private Integer quantidade;
