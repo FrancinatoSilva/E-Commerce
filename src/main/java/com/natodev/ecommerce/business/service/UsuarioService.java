@@ -5,9 +5,12 @@ import com.natodev.ecommerce.controller.dto.response.UsuarioResponseDTO;
 import com.natodev.ecommerce.infrastructure.entity.Usuario;
 import com.natodev.ecommerce.infrastructure.exception.EmailCadastradoException;
 import com.natodev.ecommerce.infrastructure.repository.UsuarioRepository;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -31,6 +34,18 @@ public class UsuarioService {
 
     }
 
+    @Transactional(readOnly = true)
+    public List<UsuarioResponseDTO> listarUsuarios(){
+        return usuarioRepository.findAll()
+                .stream()
+                .map(usuario -> new UsuarioResponseDTO(
+                        usuario.getUsuarioId(),
+                        usuario.getNome(),
+                        usuario.getEmail(),
+                        usuario.getDataCriacao()
+                ))
+                .collect(Collectors.toList());
 
+    }
 
 }
