@@ -59,4 +59,18 @@ public class UsuarioService {
         return new UsuarioResponseDTO(usuario.getUsuarioId(), usuario.getNome(), usuario.getEmail(), usuario.getDataCriacao());
     }
 
+    @Transactional
+    public UsuarioResponseDTO atualizarUsuario(UUID usuarioId, UsuarioRequestDTO usuarioRequestDTO) {
+        Usuario usuario = usuarioRepository.findById(usuarioId)
+                .orElseThrow(() -> new UsuarioNaoEncontradoException("Usuario com id " + usuarioId +
+                        " não foi encontrado!"));
+
+        usuario.setNome(usuarioRequestDTO.nome());
+        usuario.setEmail(usuarioRequestDTO.email());
+        usuario.setSenha(usuarioRequestDTO.senha());
+        Usuario usuarioAtualizado = usuarioRepository.save(usuario);
+
+        return new UsuarioResponseDTO(usuarioAtualizado.getUsuarioId(), usuarioAtualizado.getNome(), usuarioAtualizado.getEmail(),
+                usuarioAtualizado.getDataCriacao());
+    }
 }
