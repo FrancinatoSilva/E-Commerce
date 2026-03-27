@@ -23,6 +23,6 @@ public record ProdutoRequestDTO(
         @PositiveOrZero(message = "Pode ser zero, mas nunca negativo")
         Integer estoque,
 
-        @NotNull(message = "Toda produto precisa de categoria")
+        @NotNull(message = "Todo produto precisa de categoria")
         UUID categoriaId
 ) {}
