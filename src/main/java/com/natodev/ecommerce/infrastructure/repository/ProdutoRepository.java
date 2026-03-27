@@ -10,4 +10,5 @@ import java.util.UUID;
 public interface ProdutoRepository extends JpaRepository<Produto, UUID> {
 
     List<Produto> findByCategoria(Categoria categoria);
+    boolean existsByCategoria(Categoria categoria);
 }
