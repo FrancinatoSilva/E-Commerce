@@ -59,7 +59,13 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse<Void>> deletarUsuarioPorId()
+    public ResponseEntity<ApiResponse<Void>> deletarUsuarioPorId(@PathVariable UUID id) {
+
+        usuarioService.deletarUsuario(id);
+        return ResponseEntity
+                .noContent()
+                .build();
+    }
 
 
 
