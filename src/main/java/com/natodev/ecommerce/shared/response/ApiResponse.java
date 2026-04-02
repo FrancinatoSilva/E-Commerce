@@ -31,6 +31,16 @@ public class ApiResponse<T> {
 
     }
 
+    public static <T> ApiResponse<T> erro(String message) {
+        ApiResponse<T> response = new ApiResponse<>();
+        response.setSuccess(false);
+        response.setMessage(message);
+        response.setData(null);
+        response.setTimestamp(LocalDateTime.now());
+
+        return response;
+    }
+
 
 
 
