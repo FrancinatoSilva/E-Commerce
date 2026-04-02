@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/usuarios")
@@ -21,7 +22,8 @@ public class UsuarioController {
     private final UsuarioService usuarioService;
 
     @PostMapping
-    public ResponseEntity<ApiResponse> salvarUsuario(@Valid @RequestBody UsuarioRequestDTO request) {
+    public ResponseEntity<ApiResponse> salvarUsuario(
+            @Valid @RequestBody UsuarioRequestDTO request) {
 
         UsuarioResponseDTO response = usuarioService.salvarUsuario(request);
         return ResponseEntity
@@ -33,6 +35,15 @@ public class UsuarioController {
     public ResponseEntity<ApiResponse<List<UsuarioResponseDTO>>> listarUsuarios() {
 
         List<UsuarioResponseDTO> response = usuarioService.listarUsuarios();
+        return ResponseEntity
+                .ok(ApiResponse.successo(response));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiResponse<UsuarioResponseDTO>> buscarUsuarioPorId(
+            @PathVariable UUID id) {
+
+        UsuarioResponseDTO response = usuarioService.buscarUsuarioPorId(id);
         return ResponseEntity
                 .ok(ApiResponse.successo(response));
     }
