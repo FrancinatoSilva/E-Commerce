@@ -48,6 +48,19 @@ public class UsuarioController {
                 .ok(ApiResponse.successo(response));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<ApiResponse<UsuarioResponseDTO>> atualizarUsuario(
+            @PathVariable UUID id,
+            @Valid @RequestBody UsuarioRequestDTO usuarioRequestDTO) {
+
+        UsuarioResponseDTO response = usuarioService.atualizarUsuario(id, usuarioRequestDTO);
+        return ResponseEntity
+                .ok(ApiResponse.successo(response));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ApiResponse<Void>> deletarUsuarioPorId()
+
 
 
 }
